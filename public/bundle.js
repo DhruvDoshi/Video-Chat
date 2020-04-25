@@ -7559,6 +7559,12 @@ let client = {}
 navigator.mediaDevices.getUserMedia({video: true, audio: true})
     .then(stream => {
         socket.emit('NewClient')
+        video.srcObject = stream
+        video.play()
+
+        function InitPeer(type){
+            let peer = new Peer({initiator: (type == 'init')? true : false })
+        }
     })
     .catch(err => document.write(err))
 },{"simple-peer":24}]},{},[31]);
