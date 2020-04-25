@@ -7603,6 +7603,37 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
             peer.signal(answer)
         }
 
+        function CreateVideo(stream){
+            let video = document.createElement('video')
+            video.id = 'peerVideo'
+            video.srcObject = stream
+            video.class = 'embed-responsive-item'
+            document.querySelector('#peerDiv').appendChild(video)
+        }
+
+        //already 2 people chating and someone else acces 
+        function SessionActive(){
+            document.write('Session Active. Please Come Back Later')
+        }
+
     })
     .catch(err => document.write(err))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 },{"simple-peer":24}]},{},[31]);
