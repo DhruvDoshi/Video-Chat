@@ -7588,6 +7588,7 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
             client.peer = peer
         }
 
+        //for peer of type not init 
         function FrontAnswer(offer){
             let peer = InitPeer('notInit')
             peer.on('signal',(data) => {
@@ -7595,6 +7596,13 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
             })
             peer.signal(offer)
         }
+
+        function SignalAnswer(answer){
+            client.gotAnswer = true
+            let peer = client.peer
+            peer.signal(answer)
+        }
+
     })
     .catch(err => document.write(err))
 },{"simple-peer":24}]},{},[31]);
