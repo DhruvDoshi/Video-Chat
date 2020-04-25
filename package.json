@@ -1,13 +1,13 @@
 {
-  "name": "video-chat",
+  "name": "simple-videochat-webrtc",
   "version": "1.0.0",
-  "description": "Video chat between two people using simple peers",
+  "description": "Video Chat between 2 people using simple-peer",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "watch": "npx watchify ./public/main.js -o ./public/bundle.js"
   },
-  "author": "Dhruv Doshi",
+  "author": "Vinayak Sinha",
   "dependencies": {
     "express": "^4.16.4",
     "simple-peer": "^9.2.1",
@@ -15,6 +15,5 @@
   },
   "devDependencies": {
     "watchify": "^3.11.1"
-  },
-  "license": "MIT"
+  }
 }

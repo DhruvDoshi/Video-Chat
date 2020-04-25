@@ -4,16 +4,14 @@ const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const port = process.env.PORT || 3000
 
-
 app.use(express.static(__dirname + "/public"))
 let clients = 0
 
-//connecting front end and back end
-io.on('connection', function(socket) {
-    socket.on("NewClient", function() {
-        if(clients < 2){
-            if(clients == 1){
-                this.emit('CreatePeer ')
+io.on('connection', function (socket) {
+    socket.on("NewClient", function () {
+        if (clients < 2) {
+            if (clients == 1) {
+                this.emit('CreatePeer')
             }
         }
         else
@@ -25,20 +23,23 @@ io.on('connection', function(socket) {
     socket.on('disconnect', Disconnect)
 })
 
-function Disconnect(){
-    if(clients > 0)
+function Disconnect() {
+    if (clients > 0) {
+        if (clients <= 2)
+            this.broadcast.emit("Disconnect")
         clients--
+    }
 }
 
+function SendOffer(offer) {
+    this.broadcast.emit("BackOffer", offer)
+}
 
-function SendOffer(offer){
-    this.broadcasr.emit("BackOffer", offer)
+function SendAnswer(data) {
+    this.broadcast.emit("BackAnswer", data)
 }
- 
-//sending answer to other users
-function SendAnswer(data){
-    this.broadcasr.emit("BackAnswer", data)
-}
- 
 
 http.listen(port, () => console.log(`Active on ${port} port`))
+
+
+
