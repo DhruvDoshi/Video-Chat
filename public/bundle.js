@@ -7609,6 +7609,7 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
             video.srcObject = stream
             video.class = 'embed-responsive-item'
             document.querySelector('#peerDiv').appendChild(video)
+            video.play()
         }
 
         //already 2 people chating and someone else acces 

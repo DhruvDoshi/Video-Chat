@@ -16,5 +16,29 @@ io.on('connection', function(socket) {
                 this.emit('CreatePeer ')
             }
         }
+        else
+            this.emit('SessionActive')
+        clients++;
     })
+    socket.on('Offer', SendOffer)
+    socket.on('Answer', SendAnswer)
+    socket.on('disconnect', Disconnect)
 })
+
+function Disconnect(){
+    if(clients > 0)
+        clients--
+}
+
+
+function SendOffer(offer){
+    this.broadcasr.emit("BackOffer", offer)
+}
+ 
+//sending answer to other users
+function SendAnswer(data){
+    this.broadcasr.emit("BackAnswer", data)
+}
+ 
+
+http.listen(port, () => console.log(`Active on ${port} port`))
