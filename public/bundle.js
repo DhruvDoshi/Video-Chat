@@ -7587,6 +7587,14 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
             })
             client.peer = peer
         }
+
+        function FrontAnswer(offer){
+            let peer = InitPeer('notInit')
+            peer.on('signal',(data) => {
+                socket.emit('Answer', data)
+            })
+            peer.signal(offer)
+        }
     })
     .catch(err => document.write(err))
 },{"simple-peer":24}]},{},[31]);
