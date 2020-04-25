@@ -11,6 +11,8 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
         video.srcObject = stream
         video.play()
 
+
+        //used to initialize the peer
         function InitPeer(type){
             let peer = new Peer({initiator: (type == 'init')? true : false, stream:stream, trickle:false })
             peer.on('stream', function(stream){
@@ -22,5 +24,17 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true})
             })
             return peer
         }        
+
+        //for peer of type init
+        function MakePeer(){
+            client.gotAnswer = false
+            let peer = InitPeer('init')
+            peer.on('signal', function(data){
+                if(!client.gotAnswer){
+                    socket.emit('Offer', data)
+                }
+            })
+            client.peer = peer
+        }
     })
     .catch(err => document.write(err))
